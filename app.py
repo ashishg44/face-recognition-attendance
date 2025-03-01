@@ -21,6 +21,9 @@ if uploaded_file:
         {"Name": "Amit Sharma", "Enrollment No": "2023ME101", "Year": "2nd"},
         {"Name": "Priya Gupta", "Enrollment No": "2023CS205", "Year": "1st"},
         {"Name": "Rohan Verma", "Enrollment No": "2022EE303", "Year": "3rd"},
+        {"Name": "Yash Drall", "Enrollment No": "22117016", "Year": "3rd"},
+      {"Name": "Priyanshu Gupta", "Enrollment No": "20116018", "Year": "3nd"},
+      {"Name": "Priyam Pandey", "Enrollment No": "23115082", "Year": "2nd"},
     ]
     
     # Convert to DataFrame
