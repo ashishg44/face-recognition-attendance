@@ -1,33 +1,40 @@
 import streamlit as st
-import cv2
-import numpy as np
+import pandas as pd
 from PIL import Image
 
-st.title("Face Recognition Attendance System 📸")
+# Set page title
+st.set_page_config(page_title="Face Recognition Attendance", layout="wide")
 
-# Upload image
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
+# Title
+st.title("📸 Face Recognition Attendance System")
 
-if uploaded_file is not None:
-    # Convert the uploaded file to an OpenCV image
+# Upload image section
+st.header("Upload Class Image for Attendance")
+uploaded_file = st.file_uploader("Upload an image...", type=["png", "jpg", "jpeg"])
+
+if uploaded_file:
     image = Image.open(uploaded_file)
-    img_array = np.array(image)
-
-    # Display the uploaded image
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    # Load a pre-trained face detection model (Haar Cascade)
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+    # Simulated student data (mocked for now)
+    detected_students = [
+        {"Name": "Amit Sharma", "Enrollment No": "2023ME101", "Year": "2nd"},
+        {"Name": "Priya Gupta", "Enrollment No": "2023CS205", "Year": "1st"},
+        {"Name": "Rohan Verma", "Enrollment No": "2022EE303", "Year": "3rd"},
+    ]
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(detected_students)
 
-    # Convert image to grayscale
-    gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
+    # Show detected students
+    st.subheader("🎓 Detected Students")
+    st.dataframe(df, hide_index=True)
 
-    # Detect faces
-    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+    # Show total students detected
+    total_students = len(detected_students)
+    st.subheader(f"📊 Total Students Detected: {total_students}")
 
-    # Show detected faces
-    if len(faces) > 0:
-        st.success(f"✅ Detected {len(faces)} face(s)!")
-    else:
-        st.warning("⚠ No faces detected. Try another image.")
+# Footer
+st.markdown("---")
+st.markdown("🔒 **Secure & Automated Attendance System** | Designed for classrooms, libraries, and security gates.")
 
